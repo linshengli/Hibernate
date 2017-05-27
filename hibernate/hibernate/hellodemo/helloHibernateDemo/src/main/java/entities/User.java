@@ -3,12 +3,12 @@ package entities;
 /**
  * Created by tbxsx on 17-5-26.
  */
-public class Book {
+public class User {
     private long id;
     private String username;
     private String email;
 
-    public Book() {
+    public User() {
     }
 
     public long getId() {

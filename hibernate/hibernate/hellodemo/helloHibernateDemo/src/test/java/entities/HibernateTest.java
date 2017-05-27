@@ -27,11 +27,10 @@ public class HibernateTest {
         SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Book book = new Book();
-        book.setId(1l);
-        book.setEmail("123");
-        book.setUsername("Tbxsx");
-        session.save(book);
+        User user = new User();
+        user.setEmail("123");
+        user.setUsername("Tbxsx");
+        session.save(user);
         session.getTransaction().commit();
         System.out.println("Test!");
     }
