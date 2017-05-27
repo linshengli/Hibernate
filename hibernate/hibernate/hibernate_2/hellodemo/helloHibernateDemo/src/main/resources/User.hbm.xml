@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-11-11 23:19:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="entities">
+    <class name="entities.User" table="`user`">
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="email" column="`email`"/>
+        <property name="username" column="`username`"/>
+        <set name="phoneSet" table="`phone`" lazy="false">
+            <key column="userid" foreign-key=""/>
+            <element column="`phone`" type="string" not-null="true"/>
+        </set>
+        <!--<list name="phoneSet" table="`phone`" lazy="false">-->
+            <!--<key column="`userid`"/>-->
+            <!--<list-index column="idx"/>-->
+            <!--<element type="string" column="`phone`" not-null="true"/>-->
+        <!--</list>-->
+        <!--<map name="phoneSet">-->
+            <!--<key column="`userid`"/>-->
+            <!--<index column="key" type="string"/>-->
+            <!--<element column="`phone`" type="string" not-null="true"/>-->
+        <!--</map>        -->
+        <set name="addressSet" table="`user_address`" cascade="save-update">
+            <key column="uid"></key>
+            <many-to-many column="aid" class="entities.Address"/>
+        </set>
+    </class>
+</hibernate-mapping>

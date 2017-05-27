@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-11-11 23:19:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="entities">
+    <class name="entities.Husband" table="`husband`">
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="name" column="`name`"/>
+        <one-to-one name="wife" class="entities.Wife"></one-to-one>
+    </class>
+
+    <class name="entities.Wife" table="`wife`">
+        <id name="id" type="long">
+            <generator class="foreign">
+                <param name="property">husband</param>
+            </generator>
+        </id>
+        <property name="name" column="`name`"/>
+        <one-to-one name="husband" class="entities.Husband" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>
