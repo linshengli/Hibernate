@@ -1,0 +1,16 @@
+<hibernate-mapping package="entities">
+    <class name="entities.Fruit" table="`fruit`">
+        <id name="id" column="ID">
+            <!--table per class 策略不能使用 generate 策略,否则无法生成sessionFactory.可以考虑使用generateTable-->
+        </id>
+        <property name="shape"/>
+        <property name="flavor"/>
+        <property name="color"/>
+        <union-subclass name="Apple" table="`apple`">
+            <property name="weight"/>
+        </union-subclass>
+        <union-subclass name="entities.Banana" table="`banana`">
+            <property name="length"/>
+        </union-subclass>
+    </class>
+</hibernate-mapping>

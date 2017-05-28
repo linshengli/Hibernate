@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2013-11-11 23:19:21 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="entities">
+    <class name="entities.User" table="`user`">
+        <id name="id" type="long">
+            <generator class="native"/>
+        </id>
+        <property name="email" column="`email`"/>
+        <property name="username" column="`username`"/>
+        <set name="phoneSet" table="`phone`" lazy="false">
+            <key column="userid" foreign-key=""/>
+            <element column="`phone`" type="string" not-null="true"/>
+        </set>
+        <!--<list name="phoneSet" table="`phone`" lazy="false">-->
+            <!--<key column="`userid`"/>-->
+            <!--<list-index column="idx"/>-->
+            <!--<element type="string" column="`phone`" not-null="true"/>-->
+        <!--</list>-->
+        <!--<map name="phoneSet">-->
+            <!--<key column="`userid`"/>-->
+            <!--<index column="key" type="string"/>-->
+            <!--<element column="`phone`" type="string" not-null="true"/>-->
+        <!--</map>        -->
+        <!-- name="addressSet" 告诉我们配置的是addressSet映射关系,数据库中表是user_address -->
+        <set name="addressSet" table="`user_address`" cascade="save-update">
+            <!-- 在user_address table中添加外键uid,默认依赖于user table中的主键 -->
+            <key column="uid"></key>
+            <!--
+                由于是多对多关系,在找到user_address中uid与user table中id相等的元组时,元组会有多个,
+                因此通过另一个外键 aid(user_address table中)到Address中去找id与aid相等的,
+                即可找到相应的Address
+            -->
+            <many-to-many column="aid" class="entities.Address"/>
+        </set>
+    </class>
+</hibernate-mapping>
